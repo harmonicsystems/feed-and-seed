@@ -1,42 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="barn">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | default: site.title }}</title>
   <meta name="description" content="{{ site.description }}">
-  <style>
-    body {
-      font-family: Georgia, serif;
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      background: #fff;
-      color: #111;
-      line-height: 1.5;
-    }
-    a { color: #5a1a2a; }
-    a:visited { color: #3a0a1a; }
-    h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
-    hr { border: none; border-top: 1px solid #ccc; margin: 1.5rem 0; }
-    .site-header { margin-bottom: 2rem; }
-    .site-header a { text-decoration: none; color: #111; }
-    .site-header p { margin: 0; font-size: 0.9rem; color: #666; }
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.3rem; }
-    .footer { margin-top: 3rem; font-size: 0.8rem; color: #999; }
-  </style>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <script>
+    // Apply saved theme before paint to avoid flash
+    (function() {
+      try {
+        var t = localStorage.getItem('fs-theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <div class="site-header">
-    <h1><a href="/">Feed &amp; Seed</a></h1>
+    <h1><a href="{{ '/' | relative_url }}">Feed &amp; Seed</a></h1>
     <p>{{ site.description }}</p>
   </div>
   <hr>
-  {{ content }}
+  <main>
+    {{ content }}
+  </main>
   <div class="footer">
     <hr>
-    feed-and-seed.com
+    <div>feed-and-seed.com</div>
   </div>
+  <script>
+    (function() {
+      var themes = [
+        { id: 'barn',     label: 'barn — restraint' },
+        { id: 'swiss',    label: 'swiss — grid & hierarchy' },
+        { id: 'terminal', label: 'terminal — information density' },
+        { id: 'zine',     label: 'zine — cut & paste' },
+        { id: 'almanac',  label: 'almanac — botanical calm' }
+      ];
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-cycle');
+      var label = document.getElementById('theme-label');
+
+      function currentIndex() {
+        var cur = root.getAttribute('data-theme') || 'barn';
+        for (var i = 0; i < themes.length; i++) if (themes[i].id === cur) return i;
+        return 0;
+      }
+      function render() {
+        label.textContent = themes[currentIndex()].label;
+      }
+      btn.addEventListener('click', function() {
+        var next = themes[(currentIndex() + 1) % themes.length];
+        root.setAttribute('data-theme', next.id);
+        try { localStorage.setItem('fs-theme', next.id); } catch (e) {}
+        // brief spin flourish
+        btn.classList.add('is-clicked');
+        setTimeout(function() { btn.classList.remove('is-clicked'); }, 450);
+        render();
+      });
+      render();
+    })();
+
+    // Email reveal — addresses are assembled from data attrs so
+    // they never appear in the static HTML for scrapers.
+    (function() {
+      var buttons = document.querySelectorAll('.reveal-email');
+      Array.prototype.forEach.call(buttons, function(b) {
+        b.addEventListener('click', function() {
+          var u = b.getAttribute('data-u');
+          var d = b.getAttribute('data-d');
+          if (!u || !d) return;
+          var addr = u + '@' + d;
+          // Replace button with a real link so the user can copy or click again
+          var a = document.createElement('a');
+          a.href = 'mailto:' + addr;
+          a.textContent = addr;
+          b.parentNode.replaceChild(a, b);
+          a.click();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

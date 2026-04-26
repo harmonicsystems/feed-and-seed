@@ -3,3 +3,7 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 .DS_Store
+Gemfile.lock
+vendor/
+.bundle/
+.claude/

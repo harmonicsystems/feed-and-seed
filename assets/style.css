@@ -1,0 +1,553 @@
+/* ============================================================
+   Feed & Seed — themed stylesheet
+   Each theme is a full design system applied via [data-theme]
+   on <html>. Same markup, different clothing.
+   All themes are mobile-first; desktop layouts kick in at >=720px.
+   ============================================================ */
+
+/* ---------- shared reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------- theme switcher UI (shared chrome) ---------- */
+/* ---------- inline theme switcher (shared chrome, themed below) ---------- */
+.theme-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  margin: 0.5rem 0 1.5rem;
+  font-size: 0.85rem;
+}
+.theme-cycle {
+  --tc-bg: #111;
+  --tc-fg: #fff;
+  --tc-border: #111;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--tc-bg);
+  color: var(--tc-fg);
+  border: 2px solid var(--tc-border);
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 40px;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  box-shadow: 2px 2px 0 var(--tc-border);
+}
+.theme-cycle:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--tc-border);
+}
+.theme-cycle:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 var(--tc-border);
+}
+.theme-cycle-icon {
+  display: inline-block;
+  transition: transform 400ms ease;
+}
+.theme-cycle:hover .theme-cycle-icon { transform: rotate(120deg); }
+.theme-cycle.is-clicked .theme-cycle-icon { transform: rotate(360deg); }
+.theme-cycle-arrow { transition: transform 200ms ease; }
+.theme-cycle:hover .theme-cycle-arrow { transform: translateX(3px); }
+.theme-label {
+  opacity: 0.65;
+  font-style: italic;
+}
+
+/* Headings own their styling — links inside inherit, no double-decoration */
+h1 a, h2 a, h3 a {
+  color: inherit !important;
+  background: none !important;
+  border-bottom: none !important;
+  text-decoration: none;
+  padding: 0;
+}
+h1 a:hover, h2 a:hover, h3 a:hover { text-decoration: underline; }
+
+/* Reveal-email button: looks like an inline link button. JS swaps it
+   for a real <a href="mailto:..."> on click so addresses never appear
+   in the static HTML for scrapers. */
+.reveal-email {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: 44px;
+}
+.reveal-email:hover { opacity: 0.75; }
+
+/* Card — static container with heading + content, themed per palette */
+.card {
+  margin: 1.5rem 0;
+  padding: 0.25rem 1rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+}
+.card > h2:first-child { margin-top: 0.75rem; }
+.card > ul { margin: 0.5rem 0 0.75rem; }
+.card > .card-link {
+  margin: 0.75rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px dashed currentColor;
+  font-size: 0.9rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-cycle, .theme-cycle-icon, .theme-cycle-arrow { transition: none; }
+  .theme-cycle:hover { transform: none; }
+}
+
+/* ============================================================
+   THEME: BARN (default) — restraint, text-first, utility
+   Inspired by the weathered white clapboard + burgundy doors
+   ============================================================ */
+[data-theme="barn"] body,
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2rem;
+  background: #fdfbf5;
+  color: #111;
+  line-height: 1.55;
+  font-size: 17px;
+}
+[data-theme="barn"] a, body a { color: #5a1a2a; }
+[data-theme="barn"] a:visited, body a:visited { color: #3a0a1a; }
+[data-theme="barn"] h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+[data-theme="barn"] hr { border: none; border-top: 1px solid #c8bfa8; margin: 1.5rem 0; }
+[data-theme="barn"] .site-header { margin-bottom: 1.5rem; }
+[data-theme="barn"] .site-header a { text-decoration: none; color: #111; }
+[data-theme="barn"] .site-header p { margin: 0; font-size: 0.9rem; color: #776c53; }
+[data-theme="barn"] ul { padding-left: 1.2rem; }
+[data-theme="barn"] li { margin-bottom: 0.3rem; }
+[data-theme="barn"] .footer { margin-top: 3rem; font-size: 0.8rem; color: #998e76; }
+[data-theme="barn"] .theme-cycle {
+  --tc-bg: #fdfbf5;
+  --tc-fg: #5a1a2a;
+  --tc-border: #5a1a2a;
+}
+[data-theme="barn"] .theme-cycle:hover { background: #5a1a2a; color: #fdfbf5; }
+
+@media (min-width: 720px) {
+  [data-theme="barn"] body, body {
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+}
+
+/* ============================================================
+   THEME: SWISS — grid, hierarchy, typographic discipline
+   Mobile: stacked, wordmark on top. Desktop: 12-col grid.
+   ============================================================ */
+[data-theme="swiss"] body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  max-width: none;
+  margin: 0;
+  padding: 1.5rem 1.25rem 2rem;
+  background: #fff;
+  color: #000;
+  line-height: 1.3;
+  font-size: 16px;
+}
+[data-theme="swiss"] .site-header {
+  border-top: 4px solid #000;
+  padding-top: 0.75rem;
+  margin-bottom: 2rem;
+}
+[data-theme="swiss"] .site-header h1 {
+  font-size: clamp(2rem, 9vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  line-height: 0.95;
+}
+[data-theme="swiss"] .site-header a { color: #000; text-decoration: none; }
+[data-theme="swiss"] .site-header p {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  color: #000;
+}
+[data-theme="swiss"] main > hr:first-child { display: none; }
+[data-theme="swiss"] h2 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin: 2rem 0 0.75rem;
+  border-top: 1px solid #000;
+  padding-top: 0.5rem;
+}
+[data-theme="swiss"] p { font-size: 1rem; max-width: 36em; margin: 0 0 1rem; }
+[data-theme="swiss"] a { color: #e63946; text-decoration: none; border-bottom: 1px solid #e63946; }
+[data-theme="swiss"] ul { list-style: none; padding: 0; margin: 0; }
+[data-theme="swiss"] li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #000;
+  font-size: 0.95rem;
+}
+[data-theme="swiss"] hr { display: none; }
+[data-theme="swiss"] .footer {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #000;
+}
+[data-theme="swiss"] .footer hr { display: none; }
+
+@media (min-width: 720px) {
+  [data-theme="swiss"] body {
+    padding: 3rem 2rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 1.5rem;
+    grid-row-gap: 0;
+    min-height: 100vh;
+  }
+  [data-theme="swiss"] .site-header {
+    grid-column: 1 / -1;
+    margin-bottom: 3rem;
+  }
+  [data-theme="swiss"] main { grid-column: 4 / span 7; }
+  [data-theme="swiss"] .footer { grid-column: 1 / -1; }
+}
+[data-theme="swiss"] .theme-cycle {
+  --tc-bg: #fff;
+  --tc-fg: #000;
+  --tc-border: #000;
+  border-radius: 0;          /* swiss: no rounded corners */
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+}
+[data-theme="swiss"] .theme-cycle:hover { background: #e63946; color: #fff; --tc-border: #e63946; }
+[data-theme="swiss"] .theme-label { text-transform: uppercase; letter-spacing: 0.08em; font-style: normal; }
+
+/* ============================================================
+   THEME: TERMINAL — monospace, green on black, info density
+   ============================================================ */
+[data-theme="terminal"] body {
+  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  max-width: 72ch;
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+  background: #141814;        /* soft near-black with green tint */
+  color: #b5c7b0;             /* muted sage — easy on the eyes */
+  line-height: 1.5;
+  font-size: 15px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+[data-theme="terminal"] body::before {
+  content: "feed-and-seed.com ~ $ cat index.md";
+  display: block;
+  color: #6b7d68;             /* dim prompt */
+  margin-bottom: 1.25rem;
+  font-size: 0.85em;
+}
+[data-theme="terminal"] .site-header { margin-bottom: 1rem; }
+[data-theme="terminal"] .site-header h1 { font-size: 1rem; margin: 0; font-weight: normal; }
+[data-theme="terminal"] .site-header h1::before { content: "# "; color: #6b7d68; }
+[data-theme="terminal"] .site-header a { color: #d4dbc8; text-decoration: none; } /* slightly brighter for the wordmark */
+[data-theme="terminal"] .site-header p { margin: 0; color: #6b7d68; }
+[data-theme="terminal"] .site-header p::before { content: "> "; }
+[data-theme="terminal"] h2 { font-size: 1rem; font-weight: normal; margin: 1.5rem 0 0.5rem; }
+[data-theme="terminal"] h2::before { content: "## "; color: #6b7d68; }
+[data-theme="terminal"] a { color: #9bb8c9; text-decoration: underline; } /* muted dusty blue */
+[data-theme="terminal"] a:visited { color: #b8a8c9; }                       /* muted lavender */
+[data-theme="terminal"] hr {
+  border: none;
+  color: #2a2e2a;
+  text-align: left;
+  height: auto;
+  margin: 1rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+[data-theme="terminal"] hr::before {
+  content: "----------------------------------------------------------------";
+  color: #2a2e2a;
+}
+[data-theme="terminal"] ul { padding-left: 0; list-style: none; }
+[data-theme="terminal"] li::before { content: "- "; color: #6b7d68; }
+[data-theme="terminal"] .footer { margin-top: 2rem; color: #6b7d68; font-size: 0.85em; }
+[data-theme="terminal"] .footer::before { content: "$ "; }
+[data-theme="terminal"] .theme-cycle {
+  --tc-bg: transparent;
+  --tc-fg: #9bb8c9;
+  --tc-border: #6b7d68;
+  border-radius: 0;
+  font-family: inherit;
+  font-weight: normal;
+  box-shadow: none;
+}
+[data-theme="terminal"] .theme-cycle::before { content: "$ "; color: #6b7d68; }
+[data-theme="terminal"] .theme-cycle:hover { background: #1a1f1a; color: #d4dbc8; --tc-border: #9bb8c9; box-shadow: none; transform: none; }
+[data-theme="terminal"] .theme-cycle:active { transform: none; box-shadow: none; }
+[data-theme="terminal"] .theme-label { color: #6b7d68; font-style: normal; }
+
+@media (min-width: 720px) {
+  [data-theme="terminal"] body { font-size: 14px; padding: 2rem 1.5rem; }
+}
+
+/* ============================================================
+   THEME: ZINE — cut & paste, photocopy, marker
+   Mild rotations, high-contrast headlines, taped-on feel.
+   Kept subtle so it's playful, not chaotic.
+   ============================================================ */
+/* Zine palette: riso-inspired
+   --zine-paper: warm butter yellow
+   --zine-ink:   deep teal-navy (primary text & rules)
+   --zine-copper: warm copper dot / accent
+   --zine-dusk:  softer teal for secondary */
+[data-theme="zine"] body {
+  --zine-paper: #f4d85a;
+  --zine-ink:   #1e3b4d;
+  --zine-copper:#b8713a;
+  --zine-dusk:  #365a6b;
+  font-family: Georgia, "Times New Roman", serif;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  background: var(--zine-paper);
+  color: var(--zine-ink);
+  line-height: 1.55;
+  font-size: 17px;
+  /* riso misregistration grain — two faint offset dot fields */
+  background-image:
+    radial-gradient(rgba(30,59,77,0.10) 1px, transparent 1px),
+    radial-gradient(rgba(184,113,58,0.10) 1px, transparent 1px);
+  background-size: 4px 4px, 9px 9px;
+  background-position: 0 0, 2px 3px;
+}
+[data-theme="zine"] .site-header {
+  padding: 0.5rem 0 1.25rem;
+  margin: 0 0 1.75rem;
+  border-bottom: 2px solid var(--zine-ink);
+  position: relative;
+  transform: rotate(-0.4deg);
+}
+[data-theme="zine"] .site-header::before {
+  /* copper stamp dot */
+  content: "";
+  position: absolute;
+  top: 0.25rem; right: 0.5rem;
+  width: 14px; height: 14px;
+  background: var(--zine-copper);
+  border-radius: 50%;
+  box-shadow: 22px 8px 0 -4px rgba(54,90,107,0.7);
+}
+[data-theme="zine"] .site-header h1 {
+  font-family: "Impact", "Helvetica Neue", sans-serif;
+  font-size: clamp(2.5rem, 11vw, 4.25rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 0.95;
+  /* outlined "stamped" letters like the riso print */
+  color: transparent;
+  -webkit-text-stroke: 2px var(--zine-ink);
+}
+[data-theme="zine"] .site-header a { color: inherit; text-decoration: none; }
+[data-theme="zine"] .site-header p {
+  margin: 0.5rem 0 0;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--zine-dusk);
+}
+[data-theme="zine"] main > hr:first-child { display: none; }
+[data-theme="zine"] h2 {
+  font-family: "Impact", "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  margin: 2rem 0 0.5rem;
+  display: inline-block;
+  background: var(--zine-ink);
+  color: var(--zine-paper);
+  padding: 0.2rem 0.6rem;
+  transform: rotate(-0.8deg);
+}
+[data-theme="zine"] p { margin: 0 0 1rem; }
+[data-theme="zine"] a {
+  color: var(--zine-ink);
+  text-decoration: none;
+  background: linear-gradient(var(--zine-copper), var(--zine-copper)) no-repeat;
+  background-size: 100% 3px;
+  background-position: 0 100%;
+  padding: 0 1px 1px;
+}
+[data-theme="zine"] a:hover {
+  background: var(--zine-ink);
+  background-size: 100% 100%;
+  color: var(--zine-paper);
+}
+[data-theme="zine"] a:visited { color: var(--zine-dusk); }
+[data-theme="zine"] hr {
+  border: none;
+  height: 0;
+  border-top: 2px dashed var(--zine-ink);
+  margin: 1.5rem 0;
+}
+[data-theme="zine"] ul { padding-left: 1.4rem; list-style: none; }
+[data-theme="zine"] li { margin-bottom: 0.4rem; position: relative; }
+[data-theme="zine"] li::before {
+  content: "✦";
+  position: absolute;
+  left: -1.4rem;
+  color: var(--zine-copper);
+}
+[data-theme="zine"] .footer {
+  margin-top: 2.5rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  color: var(--zine-dusk);
+  transform: rotate(0.3deg);
+}
+[data-theme="zine"] .footer hr { border-top-color: var(--zine-dusk); }
+[data-theme="zine"] .theme-cycle {
+  --tc-bg: var(--zine-paper);
+  --tc-fg: var(--zine-ink);
+  --tc-border: var(--zine-ink);
+  font-family: "Impact", "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0;
+  transform: rotate(-1deg);
+}
+[data-theme="zine"] .theme-cycle:hover { background: var(--zine-ink); color: var(--zine-paper); transform: rotate(-1deg) translate(-1px, -1px); }
+[data-theme="zine"] .theme-cycle-icon { color: var(--zine-copper); }
+[data-theme="zine"] .theme-label { color: var(--zine-dusk); }
+
+@media (min-width: 720px) {
+  [data-theme="zine"] body { padding-top: 2.5rem; }
+}
+
+/* ============================================================
+   THEME: ALMANAC — seed-catalog, botanical, woodcut restraint
+   Warm cream, sage + ochre, engraving-style ornaments
+   ============================================================ */
+/* Collegiate — university press, left-aligned journal discipline.
+   Forest-green primary, muted oxblood accent, restrained ornament. */
+[data-theme="almanac"] body {
+  --col-paper:  #f3ecd8;
+  --col-ink:    #1f2a17;   /* near-black forest */
+  --col-moss:   #4a5a32;   /* deep moss */
+  --col-blood:  #7a2b28;   /* muted oxblood accent */
+  --col-dim:    #7a7460;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Palatino", "Georgia", serif;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  background: var(--col-paper);
+  color: var(--col-ink);
+  line-height: 1.55;
+  font-size: 17px;
+}
+[data-theme="almanac"] .site-header {
+  text-align: center;
+  margin-bottom: 2.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px double var(--col-ink);
+}
+[data-theme="almanac"] .site-header h1 {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: normal;
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+  margin: 0;
+  color: var(--col-ink);
+}
+[data-theme="almanac"] .site-header a { color: inherit; text-decoration: none; }
+[data-theme="almanac"] .site-header p {
+  margin: 0.35rem 0 0;
+  font-style: italic;
+  color: var(--col-dim);
+  font-size: 0.95rem;
+}
+[data-theme="almanac"] main > hr:first-child { display: none; }
+[data-theme="almanac"] main > p:first-of-type::first-letter {
+  font-family: "Iowan Old Style", "Palatino", Georgia, serif;
+  font-size: 3rem;
+  float: left;
+  line-height: 0.85;
+  padding: 0.35rem 0.45rem 0 0;
+  color: var(--col-blood);
+  font-weight: normal;
+}
+[data-theme="almanac"] h2 {
+  font-family: inherit;
+  font-weight: normal;
+  font-variant: small-caps;
+  letter-spacing: 0.14em;
+  font-size: 0.95rem;
+  margin: 2rem 0 0.65rem;
+  padding-bottom: 0.25rem;
+  color: var(--col-moss);
+  border-bottom: 1px solid var(--col-moss);
+  text-align: left;
+}
+[data-theme="almanac"] p { margin: 0 0 0.9rem; }
+[data-theme="almanac"] a {
+  color: var(--col-blood);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(122, 43, 40, 0.35);
+}
+[data-theme="almanac"] a:hover { border-bottom-color: var(--col-blood); }
+[data-theme="almanac"] a:visited { color: var(--col-moss); border-bottom-color: rgba(74, 90, 50, 0.35); }
+[data-theme="almanac"] hr {
+  border: none;
+  height: 0;
+  border-top: 1px solid var(--col-ink);
+  border-bottom: 1px solid var(--col-ink);
+  padding-top: 2px;
+  margin: 1.25rem 0;
+}
+[data-theme="almanac"] ul {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0.25rem 0 1rem;
+}
+[data-theme="almanac"] li { margin: 0.2rem 0; }
+[data-theme="almanac"] li::before {
+  content: "§ ";
+  color: var(--col-moss);
+  font-style: italic;
+}
+[data-theme="almanac"] .footer {
+  margin-top: 2.5rem;
+  font-size: 0.8rem;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--col-dim);
+  text-align: center;
+}
+[data-theme="almanac"] .footer hr { margin-bottom: 1rem; }
+[data-theme="almanac"] .theme-cycle {
+  --tc-bg: var(--col-paper);
+  --tc-fg: var(--col-blood);
+  --tc-border: var(--col-blood);
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  font-weight: normal;
+  font-size: 0.8rem;
+}
+[data-theme="almanac"] .theme-cycle:hover { background: var(--col-blood); color: var(--col-paper); }
+[data-theme="almanac"] .theme-cycle-icon { color: var(--col-moss); }
+[data-theme="almanac"] .theme-label { color: var(--col-dim); }
