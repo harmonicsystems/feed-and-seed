@@ -551,3 +551,349 @@ body {
 [data-theme="almanac"] .theme-cycle:hover { background: var(--col-blood); color: var(--col-paper); }
 [data-theme="almanac"] .theme-cycle-icon { color: var(--col-moss); }
 [data-theme="almanac"] .theme-label { color: var(--col-dim); }
+
+/* ============================================================
+   THEME: LEDGER — the barn as a working record book.
+   Cream paper with faint horizontal rules, accountants' blue
+   ink, marginalia in red. Honors the barn's history as a place
+   where things get written down — not as wooden boards.
+   ============================================================ */
+[data-theme="ledger"] body {
+  --led-paper: #f6efd8;
+  --led-line:  rgba(94, 102, 122, 0.18);   /* faint ruled-paper lines */
+  --led-ink:   #1d2c4d;                    /* ballpoint blue-black */
+  --led-red:   #a83232;                    /* margin/correction red */
+  --led-dim:   #6a5d3f;
+  font-family: "Iowan Old Style", "Palatino", "Georgia", serif;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 3rem;
+  background: var(--led-paper);
+  color: var(--led-ink);
+  font-size: 17px;
+  /* horizontal ruled lines every 1.7em, anchored to baseline */
+  line-height: 1.7em;
+  background-image: linear-gradient(to bottom, transparent calc(1.7em - 1px), var(--led-line) calc(1.7em - 1px), var(--led-line) 1.7em, transparent 1.7em);
+  background-size: 100% 1.7em;
+  background-position: 0 1.4em;
+}
+[data-theme="ledger"] .site-header {
+  margin-bottom: 1.7em;
+  padding-bottom: 0.85em;
+  border-bottom: 2px solid var(--led-ink);
+  position: relative;
+}
+[data-theme="ledger"] .site-header h1 {
+  font-size: 1.8rem;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  font-weight: normal;
+  margin: 0;
+  line-height: 1.7rem;
+}
+[data-theme="ledger"] .site-header a { color: var(--led-ink); text-decoration: none; }
+[data-theme="ledger"] .site-header p {
+  margin: 0.4em 0 0;
+  font-style: italic;
+  color: var(--led-dim);
+  font-size: 0.95rem;
+}
+[data-theme="ledger"] main > hr:first-child { display: none; }
+[data-theme="ledger"] h2 {
+  font-family: inherit;
+  font-size: 1rem;
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+  font-weight: normal;
+  margin: 1.7em 0 0;
+  padding: 0 0.4em;
+  color: var(--led-paper);
+  background: var(--led-ink);
+  display: inline-block;
+  line-height: 1.7em;
+}
+[data-theme="ledger"] p { margin: 0 0 1em; }
+[data-theme="ledger"] a {
+  color: var(--led-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--led-red);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+[data-theme="ledger"] a:visited { color: var(--led-red); }
+[data-theme="ledger"] hr {
+  border: none;
+  height: 0;
+  border-top: 1px solid var(--led-ink);
+  border-bottom: 1px solid var(--led-ink);
+  padding-top: 2px;
+  margin: 1.7em 0;
+}
+[data-theme="ledger"] ol { padding-left: 0; counter-reset: ledger; list-style: none; }
+[data-theme="ledger"] ul { padding-left: 0; list-style: none; }
+[data-theme="ledger"] li {
+  position: relative;
+  padding-left: 2.2em;
+  margin-bottom: 0;
+}
+[data-theme="ledger"] ol li { counter-increment: ledger; }
+[data-theme="ledger"] ol li::before {
+  content: counter(ledger, decimal-leading-zero) ".";
+  position: absolute;
+  left: 0;
+  color: var(--led-red);
+  font-variant-numeric: oldstyle-nums;
+  font-style: italic;
+}
+[data-theme="ledger"] ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0.5em;
+  color: var(--led-red);
+}
+[data-theme="ledger"] .card { border-color: var(--led-ink); background: rgba(255,255,255,0.4); }
+[data-theme="ledger"] .footer {
+  margin-top: 3em;
+  font-size: 0.85rem;
+  color: var(--led-dim);
+  font-style: italic;
+}
+[data-theme="ledger"] .theme-cycle {
+  --tc-bg: var(--led-paper);
+  --tc-fg: var(--led-ink);
+  --tc-border: var(--led-ink);
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  font-weight: normal;
+}
+[data-theme="ledger"] .theme-cycle:hover { background: var(--led-ink); color: var(--led-paper); }
+[data-theme="ledger"] .theme-cycle-icon { color: var(--led-red); }
+[data-theme="ledger"] .theme-label { color: var(--led-red); font-style: italic; }
+
+/* ============================================================
+   THEME: BROADSIDE — handbill / poster confidence.
+   Single huge sans wordmark, one rust accent. The studio
+   shouts what it does — Parr / Moire energy at the masthead.
+   ============================================================ */
+[data-theme="broadside"] body {
+  --br-paper: #f4ede0;
+  --br-ink:   #15110d;
+  --br-rust:  #b04a1f;
+  --br-dim:   #6a6357;
+  font-family: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+  background: var(--br-paper);
+  color: var(--br-ink);
+  line-height: 1.5;
+  font-size: 16px;
+}
+[data-theme="broadside"] .site-header {
+  border-top: 8px solid var(--br-ink);
+  border-bottom: 2px solid var(--br-ink);
+  padding: 0.5rem 0 0.75rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+[data-theme="broadside"] .site-header h1 {
+  font-family: "Anton", "Impact", "Helvetica Neue Condensed", "Helvetica Neue", sans-serif;
+  font-size: clamp(3.5rem, 16vw, 7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.85;
+  margin: 0;
+  color: var(--br-ink);
+}
+[data-theme="broadside"] .site-header a { color: inherit; text-decoration: none; }
+[data-theme="broadside"] .site-header p {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--br-rust);
+  font-weight: 600;
+}
+[data-theme="broadside"] main > hr:first-child { display: none; }
+[data-theme="broadside"] h2 {
+  font-family: inherit;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--br-ink);
+  color: var(--br-ink);
+}
+[data-theme="broadside"] p { font-size: 1.05rem; max-width: 38em; margin: 0 0 1rem; }
+[data-theme="broadside"] a {
+  color: var(--br-rust);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid var(--br-rust);
+}
+[data-theme="broadside"] a:hover { background: var(--br-rust); color: var(--br-paper); }
+[data-theme="broadside"] a:visited { color: var(--br-ink); border-bottom-color: var(--br-ink); }
+[data-theme="broadside"] hr {
+  border: none;
+  height: 4px;
+  background: var(--br-ink);
+  margin: 2rem 0;
+}
+[data-theme="broadside"] ul { list-style: none; padding: 0; margin: 0.5rem 0; }
+[data-theme="broadside"] li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--br-ink);
+  font-size: 1rem;
+  font-weight: 500;
+}
+[data-theme="broadside"] li:first-child { border-top: 1px solid var(--br-ink); }
+[data-theme="broadside"] .card { border-color: var(--br-ink); border-width: 2px; }
+[data-theme="broadside"] .footer {
+  margin-top: 3rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: var(--br-dim);
+}
+[data-theme="broadside"] .theme-cycle {
+  --tc-bg: var(--br-paper);
+  --tc-fg: var(--br-ink);
+  --tc-border: var(--br-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-width: 2px;
+  border-radius: 0;
+}
+[data-theme="broadside"] .theme-cycle:hover { background: var(--br-rust); color: var(--br-paper); border-color: var(--br-rust); }
+[data-theme="broadside"] .theme-cycle-icon { color: var(--br-rust); }
+[data-theme="broadside"] .theme-label { color: var(--br-rust); font-weight: 600; }
+
+/* ============================================================
+   THEME: PATINA — layered marks, atmospheric.
+   Warm limestone background with subtle noise. Low-contrast
+   type. Single rust accent. Feels like reading something
+   that's been around — without falling into vintage-filter cliché.
+   ============================================================ */
+[data-theme="patina"] body {
+  --pat-bg:   #e6dfd0;
+  --pat-deep: #d8d0bd;
+  --pat-ink:  #3a3329;
+  --pat-rust: #9a4a2e;
+  --pat-dim:  #8a7f6a;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Palatino", Georgia, serif;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  background: var(--pat-bg);
+  color: var(--pat-ink);
+  line-height: 1.65;
+  font-size: 17px;
+  /* layered atmospheric noise — two faint dot fields offset */
+  background-image:
+    radial-gradient(rgba(58, 51, 41, 0.05) 1px, transparent 1.5px),
+    radial-gradient(rgba(154, 74, 46, 0.04) 1px, transparent 1.5px);
+  background-size: 5px 5px, 11px 11px;
+  background-position: 0 0, 3px 4px;
+}
+[data-theme="patina"] .site-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+[data-theme="patina"] .site-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--pat-ink) 15%, var(--pat-ink) 85%, transparent);
+  opacity: 0.5;
+}
+[data-theme="patina"] .site-header h1 {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: normal;
+  letter-spacing: 0.04em;
+  margin: 0;
+  color: var(--pat-ink);
+  /* subtle layered ghost — a faded earlier mark */
+  text-shadow: 1px 1px 0 rgba(154, 74, 46, 0.08);
+}
+[data-theme="patina"] .site-header a { color: inherit; text-decoration: none; }
+[data-theme="patina"] .site-header p {
+  margin: 0.5rem 0 0;
+  font-style: italic;
+  color: var(--pat-dim);
+  font-size: 0.95rem;
+}
+[data-theme="patina"] main > hr:first-child { display: none; }
+[data-theme="patina"] h2 {
+  font-family: inherit;
+  font-weight: normal;
+  font-size: 1.05rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 2.25rem 0 0.65rem;
+  color: var(--pat-rust);
+  position: relative;
+  padding-left: 1.5rem;
+}
+[data-theme="patina"] h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1rem;
+  height: 1px;
+  background: var(--pat-rust);
+  opacity: 0.5;
+}
+[data-theme="patina"] p { margin: 0 0 1rem; }
+[data-theme="patina"] a {
+  color: var(--pat-rust);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--pat-rust);
+}
+[data-theme="patina"] a:hover { border-bottom-style: solid; }
+[data-theme="patina"] a:visited { color: var(--pat-dim); border-bottom-color: var(--pat-dim); }
+[data-theme="patina"] hr {
+  border: none;
+  height: 4px;
+  margin: 1.5rem 0;
+  background:
+    linear-gradient(to right, transparent, var(--pat-ink) 50%, transparent) 0 0/100% 1px no-repeat,
+    linear-gradient(to right, transparent, var(--pat-rust) 50%, transparent) 0 3px/100% 1px no-repeat;
+  opacity: 0.4;
+}
+[data-theme="patina"] ul { list-style: none; padding-left: 1rem; }
+[data-theme="patina"] li {
+  margin-bottom: 0.4rem;
+  position: relative;
+}
+[data-theme="patina"] li::before {
+  content: "◦";
+  position: absolute;
+  left: -1rem;
+  color: var(--pat-rust);
+  opacity: 0.7;
+}
+[data-theme="patina"] .card { border-color: var(--pat-ink); border-color: rgba(58, 51, 41, 0.4); background: var(--pat-deep); }
+[data-theme="patina"] .footer {
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--pat-dim);
+}
+[data-theme="patina"] .theme-cycle {
+  --tc-bg: transparent;
+  --tc-fg: var(--pat-rust);
+  --tc-border: var(--pat-rust);
+  font-style: italic;
+}
+[data-theme="patina"] .theme-cycle:hover { background: var(--pat-rust); color: var(--pat-bg); font-style: normal; }
+[data-theme="patina"] .theme-cycle-icon { color: var(--pat-ink); opacity: 0.6; }
+[data-theme="patina"] .theme-label { color: var(--pat-dim); font-style: italic; }
