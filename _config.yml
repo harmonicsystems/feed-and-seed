@@ -1,4 +1,11 @@
 title: Feed & Seed
 url: "https://feed-and-seed.com"
-description: Digital design consulting for local businesses.
+description: Web and graphic design for local businesses, based out of the barn in Kinderhook, NY.
+tagline: Digital design consulting for local businesses.
+locality: Kinderhook
+region: NY
+country: US
+geo:
+  latitude: 42.3937
+  longitude: -73.6987
 markdown: kramdown
