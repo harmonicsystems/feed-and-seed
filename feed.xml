@@ -1,0 +1,42 @@
+---
+layout: null
+permalink: /feed.xml
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Feed &amp; Seed</title>
+  <subtitle>{{ site.description | xml_escape }}</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>{{ site.url }}/</id>
+  <author>
+    <name>David Nyman</name>
+    <uri>{{ site.url }}/about/</uri>
+  </author>
+  <rights>© {{ site.time | date: '%Y' }} Feed &amp; Seed</rights>
+
+  <entry>
+    <title>How we make sites visible to AI search</title>
+    <link href="{{ site.url }}/geo/"/>
+    <id>{{ site.url }}/geo/</id>
+    <updated>{{ site.time | date_to_xmlschema }}</updated>
+    <summary>The methodology Feed &amp; Seed uses to make small websites visible to ChatGPT, Claude, Perplexity, Google AI Overviews, and traditional search.</summary>
+  </entry>
+
+  <entry>
+    <title>Case study: Field Guide to Kinderhook</title>
+    <link href="{{ site.url }}/work/field-guide/"/>
+    <id>{{ site.url }}/work/field-guide/</id>
+    <updated>{{ site.time | date_to_xmlschema }}</updated>
+    <summary>How we designed and built field-guide.feed-and-seed.com — a curated, AI-discoverable guide to Kinderhook, NY with 24 entries, structured data, and a clean machine-readable surface.</summary>
+  </entry>
+
+  <entry>
+    <title>About Feed &amp; Seed</title>
+    <link href="{{ site.url }}/about/"/>
+    <id>{{ site.url }}/about/</id>
+    <updated>{{ site.time | date_to_xmlschema }}</updated>
+    <summary>Feed &amp; Seed is a small web and graphic design studio run by David Nyman out of a barn in Kinderhook, NY. A working part of Harmonic Systems.</summary>
+  </entry>
+</feed>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background: warm cream (matches barn theme) -->
+  <rect width="1200" height="630" fill="#fdfbf5"/>
+
+  <!-- Hairline border, taupe -->
+  <rect x="60" y="60" width="1080" height="510" fill="none" stroke="#c8bfa8" stroke-width="2"/>
+
+  <!-- Eyebrow: small caps, letter-spaced -->
+  <text x="120" y="170"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="22"
+        letter-spacing="6"
+        fill="#776c53">EST. KINDERHOOK, NY</text>
+
+  <!-- Studio name. Single line, single text element, no tspan. -->
+  <text x="120" y="320"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="124"
+        font-weight="400"
+        fill="#111">Feed &amp; Seed</text>
+
+  <!-- Wine-colored accent rule under the name -->
+  <line x1="120" y1="350" x2="240" y2="350" stroke="#5a1a2a" stroke-width="3"/>
+
+  <!-- Subhead -->
+  <text x="120" y="410"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="36"
+        fill="#3d2820">Web &amp; graphic design for local businesses.</text>
+
+  <!-- URL, italic small print -->
+  <text x="120" y="510"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic"
+        font-size="26"
+        fill="#776c53">feed-and-seed.com</text>
+
+  <!-- Right-aligned ampersand mark, large and quiet -->
+  <text x="1080" y="510" text-anchor="end"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic"
+        font-size="64"
+        fill="#5a1a2a"
+        opacity="0.85">&amp;</text>
+</svg>

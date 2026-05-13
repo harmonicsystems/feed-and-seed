@@ -32,8 +32,14 @@ This site looks simple on purpose — click below to see what else we can do.
 
 ## Recent work
 
-- **[Field Guide to Kinderhook](https://field-guide.feed-and-seed.com)** — a curated guide to food, drink, and small adventures in and around Kinderhook, NY. Our own project; the barn's recommendations, written up plain.
+- **[Field Guide to Kinderhook](https://field-guide.feed-and-seed.com)** — a curated guide to food, drink, and small adventures in and around Kinderhook, NY. Our own project; the barn's recommendations, written up plain. [Read the case study →]({{ '/work/field-guide/' | relative_url }})
 - **[Kinderhook Farmers Market](https://harmonicsystems.github.io/market/)** — site for the Saturday market on the village green.
+
+## More
+
+- [About Feed & Seed]({{ '/about/' | relative_url }}) — who we are, how we work
+- [How we make sites visible to AI search]({{ '/geo/' | relative_url }}) — our GEO methodology
+- [Services & FAQ]({{ '/services' | relative_url }})
 
 ## Contact
 

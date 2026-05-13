@@ -27,12 +27,26 @@
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter / X card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ page_title }}">
   <meta name="twitter:description" content="{{ page_desc }}">
+  <meta name="twitter:image" content="{{ site.url }}/assets/og.png">
 
   <!-- Be explicit for AI/GEO crawlers; we welcome them. -->
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+  <!-- Icons and theme color -->
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
+  <meta name="theme-color" content="#fdfbf5">
+
+  <!-- Machine-readable alternates -->
+  <link rel="alternate" type="application/atom+xml" title="Feed & Seed — Atom" href="{{ '/feed.xml' | relative_url }}">
+  <link rel="alternate" type="text/markdown" title="Feed & Seed — LLM index" href="{{ '/llms.txt' | relative_url }}">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ '/sitemap.xml' | relative_url }}">
+
+  <!-- Larger preview card if the page has its own OG image, otherwise summary -->
+  <meta property="og:image" content="{{ site.url }}/assets/og.png">
 
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
 
@@ -41,10 +55,36 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": "{{ site.url }}/#studio",
     "name": "Feed & Seed",
     "url": "{{ site.url }}",
     "description": "{{ site.description }}",
     "image": "{{ site.url }}/assets/og.png",
+    "logo": "{{ site.url }}/assets/og.png",
+    "founder": {
+      "@type": "Person",
+      "@id": "{{ site.url }}/about/#david-nyman",
+      "name": "David Nyman",
+      "jobTitle": "Designer",
+      "worksFor": [
+        { "@type": "Organization", "name": "Feed & Seed", "url": "{{ site.url }}" },
+        { "@type": "Organization", "name": "Harmonic Systems", "url": "https://harmonic-systems.org" }
+      ],
+      "sameAs": [
+        "https://harmonic-systems.org",
+        "https://github.com/harmonicsystems"
+      ]
+    },
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Harmonic Systems",
+      "url": "https://harmonic-systems.org"
+    },
+    "sameAs": [
+      "https://harmonic-systems.org",
+      "https://github.com/harmonicsystems",
+      "https://field-guide.feed-and-seed.com"
+    ],
     "areaServed": [
       { "@type": "City", "name": "Kinderhook, NY" },
       { "@type": "AdministrativeArea", "name": "Columbia County, NY" },
@@ -65,6 +105,7 @@
       "Web design",
       "Generative Engine Optimization",
       "Local SEO",
+      "Structured data and schema.org",
       "Logo and brand identity",
       "Print design",
       "Social media graphics"
@@ -74,7 +115,8 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Logo & brand identity", "description": "A mark that works on a sign, a card, and a screen." } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Print design", "description": "Flyers, menus, posters, business cards." } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social media graphics", "description": "Consistent, clean visuals for your pages." } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consultation", "description": "A conversation to figure out what you actually need." } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consultation", "description": "A conversation to figure out what you actually need." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Generative Engine Optimization", "description": "Make your site visible to AI assistants like ChatGPT, Claude, and Google's AI overviews." } }
     ],
     "subjectOf": [
       {
