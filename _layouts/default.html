@@ -3,9 +3,117 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title | default: site.title }}</title>
-  <meta name="description" content="{{ site.description }}">
+
+  {%- assign page_desc = page.description | default: site.description -%}
+  {%- assign page_title = page.title | default: site.title -%}
+  {%- assign canonical = page.url | absolute_url -%}
+
+  <title>{{ page_title }}</title>
+  <meta name="description" content="{{ page_desc }}">
+  <link rel="canonical" href="{{ canonical }}">
+
+  <!-- Local / geo signals -->
+  <meta name="geo.region" content="US-{{ site.region }}">
+  <meta name="geo.placename" content="{{ site.locality }}, {{ site.region }}">
+  <meta name="geo.position" content="{{ site.geo.latitude }};{{ site.geo.longitude }}">
+  <meta name="ICBM" content="{{ site.geo.latitude }}, {{ site.geo.longitude }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_desc }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_desc }}">
+
+  <!-- Be explicit for AI/GEO crawlers; we welcome them. -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+
+  <!-- Structured data: who we are, where we are, what we do. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Feed & Seed",
+    "url": "{{ site.url }}",
+    "description": "{{ site.description }}",
+    "image": "{{ site.url }}/assets/og.png",
+    "areaServed": [
+      { "@type": "City", "name": "Kinderhook, NY" },
+      { "@type": "AdministrativeArea", "name": "Columbia County, NY" },
+      { "@type": "Place", "name": "Hudson Valley, NY" }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "{{ site.locality }}",
+      "addressRegion": "{{ site.region }}",
+      "addressCountry": "{{ site.country }}"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": {{ site.geo.latitude }},
+      "longitude": {{ site.geo.longitude }}
+    },
+    "knowsAbout": [
+      "Web design",
+      "Generative Engine Optimization",
+      "Local SEO",
+      "Logo and brand identity",
+      "Print design",
+      "Social media graphics"
+    ],
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web design", "description": "Fast, simple websites for local businesses." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Logo & brand identity", "description": "A mark that works on a sign, a card, and a screen." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Print design", "description": "Flyers, menus, posters, business cards." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social media graphics", "description": "Consistent, clean visuals for your pages." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consultation", "description": "A conversation to figure out what you actually need." } }
+    ],
+    "subjectOf": [
+      {
+        "@type": "WebSite",
+        "name": "Field Guide to Kinderhook",
+        "url": "https://field-guide.feed-and-seed.com",
+        "description": "A curated guide to food, drink, and small adventures in and around Kinderhook, NY."
+      },
+      {
+        "@type": "WebSite",
+        "name": "Kinderhook Farmers Market",
+        "url": "https://harmonicsystems.github.io/market/",
+        "description": "Saturday farmers market on the village green in Kinderhook, NY."
+      }
+    ]
+  }
+  </script>
+
+  {%- if page.faq -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for item in page.faq -%}
+      {
+        "@type": "Question",
+        "name": {{ item.q | jsonify }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ item.a | jsonify }}
+        }
+      }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+  {%- endif -%}
+
   <script>
     // Apply saved theme before paint to avoid flash
     (function() {
@@ -19,7 +127,7 @@
 <body>
   <div class="site-header">
     <h1><a href="{{ '/' | relative_url }}">Feed &amp; Seed</a></h1>
-    <p>{{ site.description }}</p>
+    <p>{{ site.tagline | default: site.description }}</p>
   </div>
   <hr>
   <main>
@@ -51,18 +159,20 @@
         return 0;
       }
       function render() {
-        label.textContent = themes[currentIndex()].label;
+        if (label) label.textContent = themes[currentIndex()].label;
       }
-      btn.addEventListener('click', function() {
-        var next = themes[(currentIndex() + 1) % themes.length];
-        root.setAttribute('data-theme', next.id);
-        try { localStorage.setItem('fs-theme', next.id); } catch (e) {}
-        // brief spin flourish
-        btn.classList.add('is-clicked');
-        setTimeout(function() { btn.classList.remove('is-clicked'); }, 450);
+      if (btn) {
+        btn.addEventListener('click', function() {
+          var next = themes[(currentIndex() + 1) % themes.length];
+          root.setAttribute('data-theme', next.id);
+          try { localStorage.setItem('fs-theme', next.id); } catch (e) {}
+          // brief spin flourish
+          btn.classList.add('is-clicked');
+          setTimeout(function() { btn.classList.remove('is-clicked'); }, 450);
+          render();
+        });
         render();
-      });
-      render();
+      }
     })();
 
     // Email reveal — addresses are assembled from data attrs so

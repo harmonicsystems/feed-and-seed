@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Feed & Seed
+title: Feed & Seed — Web & Graphic Design in Kinderhook, NY
+description: Feed & Seed is a small web and graphic design studio in Kinderhook, NY. Simple websites, logos, print, and consultation for local businesses in Columbia County and the Hudson Valley.
 ---
 
 Web and graphic design for local businesses.  
@@ -29,9 +30,10 @@ This site looks simple on purpose — click below to see what else we can do.
   <p class="card-link"><a href="{{ '/services' | relative_url }}">See full services &amp; FAQ →</a></p>
 </div>
 
-## Clients
+## Recent work
 
-- [Kinderhook Farmers Market](https://harmonicsystems.github.io/market/)
+- **[Field Guide to Kinderhook](https://field-guide.feed-and-seed.com)** — a curated guide to food, drink, and small adventures in and around Kinderhook, NY. Our own project; the barn's recommendations, written up plain.
+- **[Kinderhook Farmers Market](https://harmonicsystems.github.io/market/)** — site for the Saturday market on the village green.
 
 ## Contact
 
