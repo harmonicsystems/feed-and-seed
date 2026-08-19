@@ -1,4 +1,10 @@
 title: Feed & Seed — Kinderhook, NY
 url: "https://feed-and-seed.com"
 description: A work in progress located Kinderhook, NY
+locality: Kinderhook
+region: NY
+country: US
+geo:
+  latitude: 42.3937
+  longitude: -73.6987
 markdown: kramdown
